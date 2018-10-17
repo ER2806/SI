@@ -1,13 +1,14 @@
 from math import degrees, atan
 
+from lab1.module_disp.modules.base_counter_module import BaseCounterModule
 from lab1.route.route_gpx import RouteGPX
 from lab1.route.route_polyline import RoutePolyline
 import gpxpy.geo
 
 
-class CountDescAsc():
+class CountDescAsc(BaseCounterModule):
     def __init__(self, route):
-        self.route = route
+        super().__init__(route)
         self.LENGTH_CATHEGORIES_COUNT = 3
         self.STEEPNESS_CATHEGORIES_COUNT = 5
 

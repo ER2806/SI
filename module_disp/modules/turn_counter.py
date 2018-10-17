@@ -1,11 +1,11 @@
+from lab1.module_disp.modules.base_counter_module import BaseCounterModule
 from lab1.route.route_gpx import RouteGPX
 from lab1.route.route_polyline import RoutePolyline
 
 
-class CountTurns():
+class CountTurns(BaseCounterModule):
     def __init__(self, route):
-        self.route = route
-        pass
+        super().__init__(route)
 
     def _get_cathegory(self, angle):
         angle = angle % 180

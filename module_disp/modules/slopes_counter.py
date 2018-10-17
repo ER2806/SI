@@ -1,14 +1,15 @@
 from math import atan, degrees
 import gpxpy.geo
+
+from lab1.module_disp.modules.base_counter_module import BaseCounterModule
 from lab1.route.route_gpx import RouteGPX
 from lab1.route.route_polyline import RoutePolyline
 
 
-class SlopesCounter():
+class SlopesCounter(BaseCounterModule):
     def __init__(self, route):
-        self.route = route
+        super().__init__(route)
         self.STEEP_SLOPE_BOARDER = 15
-        pass
 
     def _count_distance(self, first_point, second_point):
         return gpxpy.geo.distance(first_point.get('latitude'), first_point.get('longitude'),

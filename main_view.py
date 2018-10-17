@@ -32,6 +32,7 @@ class MainView(QtWidgets.QMainWindow):
         self.count_turns.setEnabled(False)
         self.count_slopes.setEnabled(False)
         self.count_desc_asc.setEnabled(False)
+        self.call_module.setEnabled(False)
 
         self.info.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.routes.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -46,6 +47,7 @@ class MainView(QtWidgets.QMainWindow):
         self.count_turns.clicked.connect(lambda: self.module_controller.count_turns())
         self.count_slopes.clicked.connect(lambda: self.module_controller.count_slopes())
         self.count_desc_asc.clicked.connect(lambda: self.module_controller.count_desc_asc())
+        self.call_module.clicked.connect(lambda: self.module_controller.call_runtime_module())
 
         self.routes.cellClicked.connect(lambda: self.fill_controller.fill_points())
         self.points.cellChanged.connect(lambda: self.edit_controller.edit_points())

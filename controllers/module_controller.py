@@ -16,7 +16,7 @@ class ModuleController():
                                 self.view.routes.selectedItems()[0].row(),
                            0).text()]
         if self.module_manager.check_module(module_name):
-            return self.module_manager.call_module(module_name, route)
+            return self.module_manager.call_default_module(module_name, route)
         else:
             return False
 
@@ -46,6 +46,28 @@ class ModuleController():
             self.view.count_slopes.setEnabled(True)
         if self.module_manager.check_module('desc_asc_counter'):
             self.view.count_desc_asc.setEnabled(True)
+        self.view.call_module.setEnabled(True)
+
+    def call_runtime_module(self):
+        self.view.statusbar.showMessage("choose file")
+        file = QtWidgets.QFileDialog.getOpenFileName(parent=self.view, caption="Open file...", filter="*.py")
+        if file == ('', ''):
+            QtWidgets.QMessageBox.warning(None, "Warning", "File was not selected!",
+                                          buttons=QtWidgets.QMessageBox.Ok)
+        else:
+            file_path = '.'.join([i for i in list(file[0][:-3].split('/'))[-4:]])
+            print(file_path)
+            route = ROUTE_POOL[self.view.routes.item(
+                self.view.routes.selectedItems()[0].row(),
+                0).text()]
+            result = self.module_manager.call_runtime_module(file_path, route)
+            if result:
+                QtWidgets.QMessageBox.information(None, file_path + " module",
+                                        "module ended work with result:\n{0}".format(result))
+                print("COUNTER", result)
+            else:
+                print("unknown module")
+
 
 
 

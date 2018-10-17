@@ -1,3 +1,5 @@
+import importlib
+
 from lab1.utils.singleton import Singleton
 
 
@@ -5,7 +7,7 @@ class ModuleManager(Singleton):
     def __init__(self):
         self.modules_dict = dict(turn_counter=None)
 
-        self._register_modules()
+        self._default_register_modules()
         print('init')
 
     def _register_module(self, module_name):
@@ -22,8 +24,8 @@ class ModuleManager(Singleton):
         except ModuleNotFoundError as e:
             print("not found")
 
-    def _register_modules(self):
-        self._register_module('turn_counter')
+    def _default_register_modules(self):
+        #self._register_module('turn_counter')
         self._register_module('slopes_counter')
         self._register_module('desc_asc_counter')
 
@@ -36,8 +38,12 @@ class ModuleManager(Singleton):
             return True
         return False
 
-    def call_module(self, module_name, args):
+    def call_default_module(self, module_name, args):
         module = self.modules_dict.get(module_name, None)
         if module:
             return module.call(args)
+
+    def call_runtime_module(self, module_name, args):
+        module = importlib.import_module(module_name)
+        return module.call(args)
 
