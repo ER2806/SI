@@ -1,0 +1,3 @@
+ROUTE_POOL = {}
+
+POLAR_RADIUS = 6371
