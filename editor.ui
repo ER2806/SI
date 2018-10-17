@@ -92,8 +92,8 @@
    <widget class="QPushButton" name="redo">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>340</y>
+      <x>1030</x>
+      <y>310</y>
       <width>141</width>
       <height>38</height>
      </rect>
@@ -111,8 +111,8 @@
    <widget class="QPushButton" name="undo">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>290</y>
+      <x>1030</x>
+      <y>260</y>
       <width>141</width>
       <height>38</height>
      </rect>
@@ -130,8 +130,8 @@
    <widget class="QPushButton" name="import_gpx">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>240</y>
+      <x>1030</x>
+      <y>210</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -149,8 +149,8 @@
    <widget class="QPushButton" name="import_polyline">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>190</y>
+      <x>1030</x>
+      <y>160</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -195,9 +195,9 @@
    <widget class="QTableWidget" name="info">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>510</x>
       <y>10</y>
-      <width>441</width>
+      <width>511</width>
       <height>281</height>
      </rect>
     </property>
@@ -233,8 +233,8 @@
    <widget class="QPushButton" name="delete_route">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>390</y>
+      <x>1030</x>
+      <y>360</y>
       <width>141</width>
       <height>38</height>
      </rect>
@@ -252,8 +252,8 @@
    <widget class="QPushButton" name="delete_point">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>440</y>
+      <x>1030</x>
+      <y>410</y>
       <width>141</width>
       <height>38</height>
      </rect>
@@ -271,9 +271,9 @@
    <widget class="QChartView" name="widgetA" native="true">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>510</x>
       <y>300</y>
-      <width>441</width>
+      <width>511</width>
       <height>401</height>
      </rect>
     </property>
@@ -281,8 +281,8 @@
    <widget class="QPushButton" name="count_turns">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>140</y>
+      <x>1030</x>
+      <y>110</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -300,8 +300,8 @@
    <widget class="QPushButton" name="count_slopes">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>90</y>
+      <x>1030</x>
+      <y>60</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -319,8 +319,8 @@
    <widget class="QPushButton" name="count_desc_asc">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>40</y>
+      <x>1030</x>
+      <y>10</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -340,7 +340,7 @@
      <rect>
       <x>120</x>
       <y>10</y>
-      <width>311</width>
+      <width>371</width>
       <height>691</height>
      </rect>
     </property>

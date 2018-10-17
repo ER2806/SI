@@ -1,8 +1,8 @@
 import unittest
 
-from src.commands.remove.remover import Remover
-from src.route.routes_creator import RoutesCreator
-from src.route.utils import ROUTE_POOL
+from lab1.commands.remove.remover import Remover
+from lab1.route.routes_creator import RoutesCreator
+from lab1.route.utils import ROUTE_POOL
 
 
 class DeleteRoute(unittest.TestCase):

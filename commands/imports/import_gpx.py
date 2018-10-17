@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 
-from src.commands.abstract_command import AbstractCommand
-from src.commands.imports.importer_gpx import ImporterGPX
+from lab1.commands.abstract_command import AbstractCommand
+from lab1.commands.imports.importer_gpx import ImporterGPX
 
 
 class ImportGPX(AbstractCommand):

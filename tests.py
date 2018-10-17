@@ -1,6 +1,6 @@
 import unittest
 
-from src import test_convert_to_polyline, test_delete_route, test_import_polyline, test_create_point, test_create_route, \
+from lab1 import test_convert_to_polyline, test_delete_route, test_import_polyline, test_create_point, test_create_route, \
     test_edit_point, test_plot
 
 '''

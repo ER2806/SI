@@ -1,6 +1,6 @@
 import unittest
 
-from src.commands.imports.importer_polyline import ImporterPolyline
+from lab1.commands.imports.importer_polyline import ImporterPolyline
 
 
 class CreatePoint(unittest.TestCase):

@@ -2,9 +2,9 @@ import unittest
 
 import gpxpy
 
-from src.commands.edit.editor import Editor
-from src.commands.imports.importer_polyline import ImporterPolyline
-from src.route.routes_creator import RoutesCreator
+from lab1.commands.edit.editor import Editor
+from lab1.commands.imports.importer_polyline import ImporterPolyline
+from lab1.route.routes_creator import RoutesCreator
 
 class EditPoint(unittest.TestCase):
     def test_edit_point(self):

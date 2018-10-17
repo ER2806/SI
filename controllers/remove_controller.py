@@ -2,14 +2,18 @@ import gpxpy.gpx
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 
-from src.commands.operation_stack import OperationStack
-from src.commands.remove.remove import Remove
-from src.route.utils import ROUTE_POOL
+from lab1.commands.operation_stack import OperationStack
+from lab1.commands.remove.remove import Remove
+from lab1.controllers.fill_controller import FillController
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.route_polyline import RoutePolyline
+from lab1.route.utils import ROUTE_POOL
 
 
 class RemoveController():
     def __init__(self, view):
         self.view = view
+        self.fill_controller = FillController(self.view)
         self._remove = Remove()
         self.operation_stack = OperationStack()
 
@@ -24,13 +28,13 @@ class RemoveController():
 
         deleted_route = self._remove.execute(route, "route")
 
-        if deleted_route.type == gpxpy.gpx.GPX:
+        if isinstance(deleted_route, RouteGPX):
             self.operation_stack.push({
                 "Remove": {
                     "GPX": route
                 }
             })
-        elif deleted_route.type == str:
+        elif isinstance(deleted_route, RoutePolyline):
             self.operation_stack.push({
                 "Remove": {
                     "Polyline": route
@@ -62,9 +66,7 @@ class RemoveController():
 
         self._remove.execute({"route": route, "items": items}, "point")
 
-        length_on_view = self.view.info.findItems("length", Qt.MatchFixedString)
-        temp = self.view.info.item(length_on_view[0].row(), 1)
-        temp.setText("{0}".format(route.length))
+        self.fill_controller.fill_info(route.length, route.polyline)
 
         for i in items:
             self.view.points.removeRow(i.row())

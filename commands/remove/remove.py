@@ -1,7 +1,7 @@
-from src.commands.abstract_command import AbstractCommand
-from src.commands.remove.remover import Remover
-from src.commands.utils import count_length
-from src.route.utils import ROUTE_POOL
+from lab1.commands.abstract_command import AbstractCommand
+from lab1.commands.remove.remover import Remover
+from lab1.commands.utils import count_length
+from lab1.route.utils import ROUTE_POOL
 
 
 class Remove(AbstractCommand):
@@ -23,4 +23,5 @@ class Remove(AbstractCommand):
             sub = name['Point']
             route = ROUTE_POOL[sub[0]]
             route.points.insert(sub[1], sub[2])
-            route.length = count_length(route.points)
+            route.recount_length()
+            route.recount_polyline()

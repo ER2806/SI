@@ -1,12 +1,12 @@
 from PyQt5 import QtWidgets, uic
 
-from src.commands.operation_stack import OperationStack
-from src.controllers.edit_controller import EditController
-from src.controllers.fill_controller import FillController
-from src.controllers.import_controller import ImportController
-from src.controllers.module_controller import ModuleController
-from src.controllers.remove_controller import RemoveController
-from src.controllers.undo_redu_controller import UndoRedoController
+from lab1.commands.operation_stack import OperationStack
+from lab1.controllers.edit_controller import EditController
+from lab1.controllers.fill_controller import FillController
+from lab1.controllers.import_controller import ImportController
+from lab1.controllers.module_controller import ModuleController
+from lab1.controllers.remove_controller import RemoveController
+from lab1.controllers.undo_redu_controller import UndoRedoController
 
 
 

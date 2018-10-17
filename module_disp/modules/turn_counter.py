@@ -1,5 +1,5 @@
-from src.route.route_gpx import RouteGPX
-from src.route.route_polyline import RoutePolyline
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.route_polyline import RoutePolyline
 
 
 class CountTurns():
@@ -25,14 +25,23 @@ class CountTurns():
             return 6
         return 7
 
+    def _check(self):
+        emptyFlag = True
+        for point in self.route.points:
+            angle = point.get('course', None)
+            if angle:
+                return False
+        return emptyFlag
+
     def _count_turns(self):
+        if self._check():
+            return False
         points = self.route.points
         turn_ar = [0] * 8
         print("_count_turns", points)
         for point in points:
-            print("angle", point.get('course'))
-            print("cat", self._get_cathegory(point.get('course')))
-            turn_ar[self._get_cathegory(point.get('course'))] += 1
+            angle = point.get('course', None)
+            turn_ar[self._get_cathegory(angle)] += 1
         return turn_ar
 
     def call_counter(self):

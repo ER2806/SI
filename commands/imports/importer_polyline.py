@@ -1,5 +1,5 @@
-from src.route.routes_creator import RoutesCreator
-from src.utils.singleton import Singleton
+from lab1.route.routes_creator import RoutesCreator
+from lab1.utils.singleton import Singleton
 
 
 class ImporterPolyline(Singleton):

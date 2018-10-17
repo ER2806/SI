@@ -2,7 +2,7 @@ import unittest
 
 import gpxpy
 
-from src.route.routes_creator import RoutesCreator
+from lab1.route.routes_creator import RoutesCreator
 
 
 class CreateRoute(unittest.TestCase):

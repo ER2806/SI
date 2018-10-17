@@ -1,11 +1,11 @@
 from PyQt5.QtCore import Qt
 
-from src.commands.edit.edit import Edit
-from src.commands.operation_stack import OperationStack
-from src.commands.remove.remove import Remove
-from src.commands.utils import HISTORY, count_length, field_idx_to_name
-from src.controllers.fill_controller import FillController
-from src.route.utils import ROUTE_POOL
+from lab1.commands.edit.edit import Edit
+from lab1.commands.operation_stack import OperationStack
+from lab1.commands.remove.remove import Remove
+from lab1.commands.utils import HISTORY, count_length, field_idx_to_name
+from lab1.controllers.fill_controller import FillController
+from lab1.route.utils import ROUTE_POOL
 
 
 class UndoRedoController():
@@ -47,7 +47,7 @@ class UndoRedoController():
             if list(action.keys())[0] == 'Point':
                 self.fill_controller.fill_points()
             else:
-                self.fill_controller.fill_routes()
+                self.fill_controller.fill_all_routes()
 
     def redo(self):
         print("redo starts")
@@ -72,16 +72,19 @@ class UndoRedoController():
                 new_val = route.points[sub['point'][1]]
                 new_val.update({field_idx_to_name(sub['point'][2]): sub['point'][3]})
                 route.points[sub['point'][1]] = new_val
-                print("edit redo", str(sub['point'][3]))
-                print("route.points", route.points)
-                route.length = count_length(route.points)
+                route.recount_length()
+                route.recount_polyline()
                 self.fill_controller.fill_points()
+                self.fill_controller.fill_info(route.length, route.polyline)
 
         elif key == "Remove":
             if list(sub.keys())[0] == "Point":
                 route = ROUTE_POOL[sub['Point'][0]]
                 route.points.pop(sub['Point'][1])
+                route.recount_length()
+                route.recount_polyline()
                 self.view.points.removeRow(sub['Point'][1])
+                self.fill_controller.fill_info(route.length, route.polyline)
 
             elif list(sub.keys())[0] == "GPX":
                 route = sub['GPX']

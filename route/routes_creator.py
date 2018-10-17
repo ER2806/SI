@@ -1,5 +1,5 @@
-from src.route.route_gpx import RouteGPX
-from src.route.route_polyline import RoutePolyline
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.route_polyline import RoutePolyline
 import gpxpy.gpx
 
 
@@ -11,6 +11,4 @@ class RoutesCreator:  # фабричный метод
             return RouteGPX(source)
         elif type(source) == str:
             return RoutePolyline(source)
-        else:
-            raise UnknowRouteType
 

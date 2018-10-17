@@ -2,11 +2,11 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5 import QtWidgets
 
-from src.commands.imports.import_gpx import ImportGPX
-from src.commands.imports.import_polyline import ImportPolyline
-from src.commands.operation_stack import OperationStack
-from src.controllers.fill_controller import FillController
-from src.route.utils import ROUTE_POOL
+from lab1.commands.imports.import_gpx import ImportGPX
+from lab1.commands.imports.import_polyline import ImportPolyline
+from lab1.commands.operation_stack import OperationStack
+from lab1.controllers.fill_controller import FillController
+from lab1.route.utils import ROUTE_POOL
 
 
 class ImportController():
@@ -33,12 +33,11 @@ class ImportController():
                         }
                     })
                 self.view.statusbar.showMessage("The route from {0} was loaded.".format(file[0]))
-                #self._show(route)
-                self.fill_controller.fill_routes()
+                self.fill_controller.fill_route(route)
             else:
                 QtWidgets.QMessageBox.critical(None, "Error!", "Error!",
                                                    defaultButton=QtWidgets.QMessageBox.Ok)
-
+        #print('import_gpx_controller', ROUTE_POOL)
 
     def import_polyline(self):
         self.view.statusbar.showMessage("Enter polyline.")
@@ -54,22 +53,10 @@ class ImportController():
                 }
             })
             self.view.statusbar.showMessage("The polyline {0} with title {1} was loaded.".format(polyline, route.title))
-            self._show(route)
+            self.fill_controller.fill_route(route)
 
         else:
             QtWidgets.QMessageBox.warning(None, "Warning", "Polyline enter error!",
                                           buttons=QtWidgets.QMessageBox.Ok)
 
-
-    def _show(self, route):
-        self.view.delete_route.setEnabled(True)
-        base_route = self.view.routes.rowCount()
-        self.view.routes.insertRow(base_route)
-        title = QTableWidgetItem("{0}".format(route.title))
-        length = QTableWidgetItem("{0:.3f}".format(route.length))
-        time = QTableWidgetItem("{0}".format(route.date))
-        self.view.routes.setItem(base_route, 0, title)
-        self.view.routes.setItem(base_route, 1, length)
-        self.view.routes.setItem(base_route, 2, time)
-        length.setFlags(Qt.ItemIsSelectable)
-        self.view.routes.resizeColumnsToContents()
+        print('import_polyline_controller', ROUTE_POOL)

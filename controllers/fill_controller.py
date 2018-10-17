@@ -1,35 +1,46 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtChart import QChart, QLineSeries
 
-from src.commands.utils import count_length
-from src.controllers.module_controller import ModuleController
-from src.route.utils import ROUTE_POOL
+from lab1.commands.utils import count_length
+from lab1.controllers.module_controller import ModuleController
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.utils import ROUTE_POOL
 
 class FillController():
     def __init__(self, view):
         self.view = view
         self.module_controller = ModuleController(self.view)
-        self.COUNTER = 0
 
-    def fill_routes(self):
-        print(ROUTE_POOL)
+    def fill_route(self, route):
+        self.view.delete_route.setEnabled(True)
+        base_route = self.view.routes.rowCount()
+        self.view.routes.insertRow(base_route)
+        title = QTableWidgetItem("{0}".format(route.title))
+        self.view.routes.setItem(base_route, 0, title)
+
+
+    def fill_all_routes(self):
         for name, route in ROUTE_POOL.items():
             if route:
-                print('route', route)
-                self.view.delete_route.setEnabled(True)
-                base_route = self.view.routes.rowCount()
-                self.view.routes.insertRow(base_route)
-                title = QTableWidgetItem("{0}".format(route.title))
-                self.view.routes.setItem(base_route, 0, title)
-                self.view.routes.resizeColumnsToContents()
+                self.fill_route(route)
+
+    def fill_info(self, length, polyline):
+        item_to_change = self.view.info.findItems("length", Qt.MatchFixedString)
+        temp = self.view.info.item(item_to_change[0].row(), 1)
+        temp.setText("{0}".format(length))
+
+        item_to_change = self.view.info.findItems("polyline", Qt.MatchFixedString)
+        temp = self.view.info.item(item_to_change[0].row(), 1)
+        temp.setText("{0}".format(polyline))
+
+
 
     def _enable_additions(self):
         self.view.delete_point.setEnabled(True)
         self.module_controller.activate_buttons()
 
     def fill_points(self):
-        self.COUNTER += 1
-        print('counter', self.COUNTER)
         while self.view.points.rowCount() != 0:
             self.view.points.removeRow(0)
         while self.view.info.rowCount() != 0:
@@ -48,8 +59,6 @@ class FillController():
             self.view.points.setItem(r, 1, lon)
             self.view.points.setItem(r, 2, elev)
 
-        self.view.points.resizeColumnsToContents()
-
         for pr in route.__dict__:
             if pr != 'points':
                 r = self.view.info.rowCount()
@@ -59,9 +68,9 @@ class FillController():
                 self.view.info.setItem(r, 0, pr)
                 self.view.info.setItem(r, 1, value)
 
-        self.view.info.resizeColumnsToContents()
-        self._construct_plot(route)
+        self.construct_plot(route)
         self._enable_additions()
+        self.fill_info(route.length, route.polyline)
 
     @staticmethod
     def _get_series_for_plot(route):
@@ -75,18 +84,21 @@ class FillController():
         return series_array
 
 
-    def _construct_plot(self, route):
+    def construct_plot(self, route):
+        if not isinstance(route, RouteGPX):
+            return
+
         self.chart = QChart()
         self.series = QLineSeries()
 
         self.series_array = self._get_series_for_plot(route)
-        print(self.series_array)
+        #print(self.series_array)
         for series in self.series_array:
             self.series.append(*series)
 
         self.chart.addSeries(self.series)
-        print(self.chart)
-        self.chart.setTitle('Example')
+        #print(self.chart)
+        self.chart.setTitle(route.title)
         self.chart.createDefaultAxes()
         self.view.widgetA.setChart(self.chart)
 

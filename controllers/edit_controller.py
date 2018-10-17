@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
-from src.commands.edit.edit import Edit
-from src.commands.operation_stack import OperationStack
-from src.controllers.fill_controller import FillController
-from src.route.utils import ROUTE_POOL
+from lab1.commands.edit.edit import Edit
+from lab1.commands.operation_stack import OperationStack
+from lab1.controllers.fill_controller import FillController
+from lab1.route.utils import ROUTE_POOL
 
 
 class EditController():
@@ -17,11 +17,13 @@ class EditController():
         items = self.view.routes.selectedItems()
         route = ROUTE_POOL[self.view.routes.item(items[0].row(), 0).text()]
         points = self.view.points.selectedItems()
+        if not points:
+            return
+
         changed_points = self._edit.execute({"route": route, "points": points})
 
         if changed_points:
             for point in changed_points:
-                print("edit point", point)
                 self.operation_stack.push({
                     "Edit": {
                         "point": [point.get('title'),
@@ -31,9 +33,7 @@ class EditController():
                                 point.get('point')]
                     }
                 })
+            self.fill_controller.fill_info(route.length, route.polyline)
 
-            item_to_change = self.view.info.findItems("length", Qt.MatchFixedString)
-            temp = self.view.info.item(item_to_change[0].row(), 1)
-            temp.setText("{0}".format(route.length))
-
+        self.fill_controller.construct_plot(route)
 

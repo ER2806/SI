@@ -1,7 +1,7 @@
 from math import degrees, atan
 
-from src.route.route_gpx import RouteGPX
-from src.route.route_polyline import RoutePolyline
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.route_polyline import RoutePolyline
 import gpxpy.geo
 
 
@@ -18,6 +18,8 @@ class CountDescAsc():
                                     second_point.get('elevation', None))
 
     def _count_desc_asc(self):
+        if self._check():
+            return False
         caths = [[0] * self.STEEPNESS_CATHEGORIES_COUNT] * self.LENGTH_CATHEGORIES_COUNT
         points = self.route.points
         for idx in range(1, len(points)):
@@ -28,6 +30,13 @@ class CountDescAsc():
             caths[length_cath][steepness_cath] += 1
         return caths
 
+    def _check(self):
+        emptyFlag = True
+        for point in self.route.points:
+            elev = point.get('elevation', None)
+            if elev:
+                return False
+        return emptyFlag
 
     def _get_length_cathegory(self, a, b):
         distance = self._count_distance(a, b) * 1000

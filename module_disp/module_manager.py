@@ -1,4 +1,4 @@
-from src.utils.singleton import Singleton
+from lab1.utils.singleton import Singleton
 
 
 class ModuleManager(Singleton):
@@ -11,13 +11,13 @@ class ModuleManager(Singleton):
     def _register_module(self, module_name):
         try:
             if module_name == "turn_counter":
-                import src.module_disp.modules.turn_counter as turn_counter
+                import lab1.module_disp.modules.turn_counter as turn_counter
                 self.modules_dict.update(dict(turn_counter=turn_counter))
             elif module_name == "slopes_counter":
-                import src.module_disp.modules.slopes_counter as slopes_counter
+                import lab1.module_disp.modules.slopes_counter as slopes_counter
                 self.modules_dict.update(dict(slopes_counter=slopes_counter))
             elif module_name == "desc_asc_counter":
-                import src.module_disp.modules.desc_asc_counter as desc_asc_counter
+                import lab1.module_disp.modules.desc_asc_counter as desc_asc_counter
                 self.modules_dict.update(dict(desc_asc_counter=desc_asc_counter))
         except ModuleNotFoundError as e:
             print("not found")

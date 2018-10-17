@@ -1,5 +1,5 @@
-from src.commands.utils import HISTORY
-from src.utils.singleton import Singleton
+from lab1.commands.utils import HISTORY
+from lab1.utils.singleton import Singleton
 
 
 class OperationStack(Singleton):

@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets
 
-from src.commands.operation_stack import OperationStack
-from src.module_disp.module_manager import ModuleManager
-from src.route.utils import ROUTE_POOL
+from lab1.commands.operation_stack import OperationStack
+from lab1.module_disp.module_manager import ModuleManager
+from lab1.route.utils import ROUTE_POOL
 
 
 class ModuleController():
@@ -23,7 +23,7 @@ class ModuleController():
     def _manage_count_module(self, module_name):
         result = self._call_count_module(module_name)
         if result:
-            QtWidgets.QMessageBox.critical(None, module_name + " module",
+            QtWidgets.QMessageBox.information(None, module_name + " module",
                                         "module ended work with result:\n{0}".format(result))
             print("COUNTER", result)
         else:
@@ -39,13 +39,12 @@ class ModuleController():
         self._manage_count_module("desc_asc_counter")
 
     def activate_buttons(self):
-        modules = self.module_manager.get_modules()
-        print('activate_buttons', modules)
-        if 'turn_counter' in modules:
+        if self.module_manager.check_module('turn_counter'):
+            print('turn_counter check successfull')
             self.view.count_turns.setEnabled(True)
-        if 'slopes_counter' in modules:
+        if self.module_manager.check_module('slopes_counter'):
             self.view.count_slopes.setEnabled(True)
-        if 'desc_asc_counter' in modules:
+        if self.module_manager.check_module('desc_asc_counter'):
             self.view.count_desc_asc.setEnabled(True)
 
 

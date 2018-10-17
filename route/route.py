@@ -1,4 +1,4 @@
-from src.route.utils import ROUTE_POOL
+from lab1.route.utils import ROUTE_POOL
 
 
 class Route:

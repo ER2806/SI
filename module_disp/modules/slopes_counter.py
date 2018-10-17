@@ -1,7 +1,7 @@
 from math import atan, degrees
 import gpxpy.geo
-from src.route.route_gpx import RouteGPX
-from src.route.route_polyline import RoutePolyline
+from lab1.route.route_gpx import RouteGPX
+from lab1.route.route_polyline import RoutePolyline
 
 
 class SlopesCounter():
@@ -16,7 +16,18 @@ class SlopesCounter():
                                     second_point.get('latitude'), second_point.get('longitude'),
                                     second_point.get('elevation', None))
 
+    def _check(self):
+        emptyFlag = True
+        for point in self.route.points:
+            elev = point.get('elevation', None)
+            if elev:
+                return False
+        return emptyFlag
+
     def _count_slopes(self):
+        if self._check():
+            return False
+
         counter = 0
         points = self.route.points
         for idx in range(len(points)):

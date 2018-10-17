@@ -1,5 +1,5 @@
-from src.commands.abstract_command import AbstractCommand
-from src.commands.edit.editor import Editor
+from lab1.commands.abstract_command import AbstractCommand
+from lab1.commands.edit.editor import Editor
 
 
 class Edit(AbstractCommand):

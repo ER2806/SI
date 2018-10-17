@@ -1,8 +1,8 @@
 import unittest
 
 import gpxpy
-from src.controllers.fill_controller import FillController
-from src.route.routes_creator import RoutesCreator
+from lab1.controllers.fill_controller import FillController
+from lab1.route.routes_creator import RoutesCreator
 
 
 class Plot(unittest.TestCase):

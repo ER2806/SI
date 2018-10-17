@@ -1,7 +1,7 @@
 import unittest
 
-from src.commands.imports.importer_polyline import ImporterPolyline
-from src.route.route_polyline import RoutePolyline
+from lab1.commands.imports.importer_polyline import ImporterPolyline
+from lab1.route.route_polyline import RoutePolyline
 
 
 class ImportPolyline(unittest.TestCase):
